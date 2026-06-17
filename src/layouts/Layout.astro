@@ -1,0 +1,77 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "María Elisa Lugo — Content Creator & Brand Ambassador",
+  description = "Portfolio of María Elisa Lugo (@brunettebarbie.ve). Content creator and brand ambassador with 500K+ followers and 8+ years partnering with global brands like Fashion Nova, Pretty Little Thing, and Bang Energy.",
+  image = "/og-image.jpg",
+} = Astro.props;
+
+import "../styles/global.css";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="María Elisa Lugo" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "María Elisa Lugo",
+        "alternateName": "brunettebarbie.ve",
+        "description": "Content Creator & Brand Ambassador with 500K+ community",
+        "url": "https://brunettebarbie.vercel.app",
+        "sameAs": [
+          "https://www.instagram.com/brunettebarbie.ve"
+        ],
+        "jobTitle": "Content Creator & Brand Ambassador",
+        "email": "barbiebusiness.contact@gmail.com",
+        "knowsAbout": ["Fashion", "Beauty", "Lifestyle", "Wellness", "Content Creation"]
+      }
+    })} />
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  </head>
+  <body class="bg-ivory text-espresso font-body antialiased overflow-x-hidden">
+    <slot />
+  </body>
+</html>

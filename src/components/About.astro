@@ -1,0 +1,157 @@
+---
+import { stats } from "../data/collaborations";
+
+const icons: Record<string, string> = {
+  community: `<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>`,
+  handshake: `<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>`,
+  calendar: `<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>`,
+  globe: `<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>`,
+};
+---
+
+<section id="about" class="py-20 md:py-28 bg-ivory relative overflow-hidden">
+  <!-- Decorative background element -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-cream/40 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+  
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <span class="text-taupe text-sm tracking-[0.3em] uppercase font-medium block mb-3">Get to Know Me</span>
+      <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl text-dark font-bold mb-2">
+        About <span class="text-mocha italic">Me</span>
+      </h2>
+      <div class="w-16 h-0.5 bg-mocha mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20">
+      <!-- Bio Text -->
+      <div class="reveal lg:sticky lg:top-28">
+        <p class="text-lg md:text-xl text-espresso/90 leading-relaxed mb-6 font-light">
+          I'm <strong class="font-semibold text-dark">María Elisa Lugo</strong>, a Venezuelan-born content creator and brand ambassador based in the U.S. with a passion for fashion, beauty, and authentic storytelling.
+        </p>
+        <p class="text-base md:text-lg text-taupe leading-relaxed mb-6">
+          For over <strong class="text-espresso font-medium">8 years</strong>, I've partnered with leading global brands to create compelling content that drives engagement and builds lasting connections with audiences. My approach combines genuine product advocacy with high-quality visual storytelling.
+        </p>
+        <p class="text-base md:text-lg text-taupe leading-relaxed mb-8">
+          With a <strong class="text-espresso font-medium">500K+ community</strong> that trusts my voice, I bring not just reach — but real influence. Every collaboration I take on is a long-term relationship built on trust, creativity, and measurable results.
+        </p>
+        
+        <!-- CTA within about -->
+        <div class="flex flex-wrap gap-4">
+          <a href="#collaborations" class="inline-flex items-center gap-2 px-6 py-3 bg-mocha text-white font-medium rounded-full hover:bg-espresso transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+            View My Work
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/brunettebarbie.ve" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 border-2 border-mocha text-mocha font-medium rounded-full hover:bg-mocha hover:text-white transition-all duration-300 hover:-translate-y-0.5">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            Follow Me
+          </a>
+        </div>
+      </div>
+
+      <!-- About Image — full portrait, no crop -->
+      <div class="reveal relative">
+        <div class="relative rounded-2xl overflow-hidden shadow-card group">
+          <img
+            src="/Foto de perfil de portafolio .jpg"
+            alt="María Elisa Lugo — Content Creator & Brand Ambassador"
+            class="w-full h-auto object-contain rounded-2xl transition-transform duration-700 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+          <!-- Subtle gradient overlay at bottom only -->
+          <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-dark/20 to-transparent"></div>
+        </div>
+        <!-- Decorative frame -->
+        <div class="absolute -bottom-3 -right-3 w-full h-full border-2 border-sand/50 rounded-2xl -z-10"></div>
+        <div class="absolute -top-3 -left-3 w-24 h-24 border-t-2 border-l-2 border-mocha/30 rounded-tl-2xl -z-10"></div>
+      </div>
+    </div>
+
+    <!-- Stats Grid with Counter Animation -->
+    <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
+      {stats.map((stat, index) => (
+        <div
+          class="text-center p-8 rounded-2xl bg-white shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1 group"
+        >
+          <div class="flex justify-center mb-4 text-mocha group-hover:text-espresso transition-colors duration-300" set:html={icons[stat.icon] || ''} />
+          <span class="block text-3xl md:text-4xl font-heading font-bold text-dark mb-1">
+            {stat.prefix ? (
+              <span>{stat.prefix}</span>
+            ) : (
+              <span
+                class="counter"
+                data-count-to={stat.countTo}
+                data-suffix={stat.suffix}
+              >0{stat.suffix}</span>
+            )}
+          </span>
+          <span class="text-sm text-taupe tracking-wide uppercase font-medium">
+            {stat.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Counter Animation — easeOutExpo for a premium feel
+  function animateCounter(el: HTMLElement) {
+    const target = parseInt(el.dataset.countTo || "0", 10);
+    const suffix = el.dataset.suffix || "";
+
+    if (target === 0) return; // Skip non-numeric stats like "Global"
+
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+
+    // easeOutExpo — fast start, smooth deceleration
+    function easeOutExpo(t: number): number {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutExpo(progress);
+      const current = Math.round(eased * target);
+
+      el.textContent = current + suffix;
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Trigger counters when stats grid enters viewport
+  const statsGrid = document.getElementById("stats-grid");
+  if (statsGrid) {
+    let hasAnimated = false;
+
+    const statsObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            hasAnimated = true;
+            // Stagger each counter slightly
+            const counters = statsGrid.querySelectorAll<HTMLElement>(".counter");
+            counters.forEach((counter, i) => {
+              setTimeout(() => animateCounter(counter), i * 150);
+            });
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    statsObserver.observe(statsGrid);
+  }
+</script>

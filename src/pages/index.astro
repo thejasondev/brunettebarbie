@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import BrandMarquee from "../components/BrandMarquee.astro";
+import Collaborations from "../components/Collaborations.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+  <Navbar />
+  <main>
+    <Hero />
+    <About />
+    <BrandMarquee />
+    <Collaborations />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Scroll Reveal — Intersection Observer
+  const revealElements = document.querySelectorAll(".reveal");
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    }
+  );
+
+  revealElements.forEach((el) => revealObserver.observe(el));
+
+  // Smooth scroll with offset for fixed navbar
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = (anchor as HTMLAnchorElement).getAttribute("href");
+      if (targetId && targetId !== "#") {
+        const target = document.querySelector(targetId);
+        if (target) {
+          const navbarHeight = 80;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth",
+          });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
+  });
+</script>

@@ -1,0 +1,189 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+/* ===== Design System — BrunetteBarbie ===== */
+@theme {
+  /* Color Palette */
+  --color-mocha: #8d7b68;
+  --color-taupe: #a4907c;
+  --color-sand: #c8b6a6;
+  --color-cream: #f1dec9;
+  --color-ivory: #faf6f1;
+  --color-espresso: #5a4d3f;
+  --color-dark: #3d3226;
+  --color-white: #ffffff;
+  --color-overlay: rgba(90, 77, 63, 0.6);
+  --color-overlay-light: rgba(241, 222, 201, 0.15);
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+
+  /* Spacing Scale */
+  --spacing-section: 6rem;
+  --spacing-section-mobile: 3.5rem;
+
+  /* Border Radius */
+  --radius-card: 1rem;
+  --radius-button: 0.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(90, 77, 63, 0.08);
+  --shadow-card-hover: 0 8px 40px rgba(90, 77, 63, 0.15);
+  --shadow-nav: 0 2px 20px rgba(90, 77, 63, 0.06);
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 350ms;
+  --duration-slow: 600ms;
+
+  /* Z-index scale */
+  --z-nav: 100;
+  --z-modal: 200;
+  --z-overlay: 50;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-espresso);
+    background-color: var(--color-ivory);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-dark);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+}
+
+/* ===== Scroll Reveal Animation ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slow) var(--ease-smooth),
+              transform var(--duration-slow) var(--ease-smooth);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Marquee Animation ===== */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ===== Hamburger Animation ===== */
+.hamburger-line {
+  transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.hamburger-active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sand);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-taupe);
+}
+
+/* ===== Selection Color ===== */
+::selection {
+  background-color: var(--color-cream);
+  color: var(--color-espresso);
+}
+
+/* ===== Focus Styles ===== */
+:focus-visible {
+  outline: 2px solid var(--color-mocha);
+  outline-offset: 2px;
+}
+
+/* ===== Gradient Text Utility ===== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-mocha), var(--color-taupe));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== Glass Effect ===== */
+.glass {
+  background: rgba(250, 246, 241, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ===== Shimmer Loading ===== */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--color-cream) 25%, var(--color-ivory) 50%, var(--color-cream) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ===== Fade In Up (for staggered entries) ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp var(--duration-slow) var(--ease-smooth) both;
+}
