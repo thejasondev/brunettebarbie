@@ -6,6 +6,7 @@ export interface Collaboration {
   description: string;
   category: string;
   url: string;
+  logo: string;
 }
 
 export const collaborations: Collaboration[] = [
@@ -17,6 +18,7 @@ export const collaborations: Collaboration[] = [
     description: "Long-term brand ambassador creating fashion-forward content across seasonal campaigns, new launches, and lifestyle collections.",
     category: "Fashion",
     url: "https://www.fashionnova.com",
+    logo: "/logo-collab/fashionnova.webp",
   },
   {
     name: "Pretty Little Thing",
@@ -26,6 +28,7 @@ export const collaborations: Collaboration[] = [
     description: "Ongoing partnership featuring trend-driven looks, exclusive drops, and styled editorial content for a global fashion audience.",
     category: "Fashion",
     url: "https://www.prettylittlething.com",
+    logo: "/logo-collab/plt.webp",
   },
   {
     name: "Bang Energy",
@@ -35,6 +38,7 @@ export const collaborations: Collaboration[] = [
     description: "Brand ambassador representing an active, energetic lifestyle through dynamic content creation and event appearances.",
     category: "Lifestyle",
     url: "https://www.bangenergy.com",
+    logo: "/logo-collab/bang.webp",
   },
   {
     name: "WOW Skin Science",
@@ -44,6 +48,7 @@ export const collaborations: Collaboration[] = [
     description: "Trusted partner showcasing premium skincare routines and product integrations for the U.S. market with authentic, results-driven content.",
     category: "Beauty & Skincare",
     url: "https://www.wowskinscience.com",
+    logo: "/logo-collab/wowskinscience.webp",
   },
   {
     name: "Vagy Rejuvenation",
@@ -53,6 +58,7 @@ export const collaborations: Collaboration[] = [
     description: "Wellness brand collaboration focused on empowering women through self-care narratives and genuine product advocacy.",
     category: "Wellness",
     url: "https://www.vagyrejuvenation.com",
+    logo: "/logo-collab/vagy.webp",
   },
   {
     name: "RYZE Superfoods",
@@ -62,6 +68,7 @@ export const collaborations: Collaboration[] = [
     description: "Health-conscious partnership creating engaging content around mushroom coffee and daily wellness rituals.",
     category: "Wellness",
     url: "https://www.rfryzesuperfoods.com",
+    logo: "/logo-collab/ryze.webp",
   },
   {
     name: "Bliss",
@@ -71,6 +78,7 @@ export const collaborations: Collaboration[] = [
     description: "Skincare collaboration highlighting clean beauty products through lifestyle-integrated, approachable content.",
     category: "Beauty & Skincare",
     url: "https://www.blissworld.com",
+    logo: "/logo-collab/bliss.webp",
   },
   {
     name: "Miami Swim Week",
@@ -80,6 +88,7 @@ export const collaborations: Collaboration[] = [
     description: "Featured in runway shows and brand activations, collaborating indirectly with multiple swimwear and fashion labels during the event.",
     category: "Fashion Events",
     url: "https://www.miamiswimweek.com",
+    logo: "/logo-collab/miamiswinweek.webp",
   },
 ];
 

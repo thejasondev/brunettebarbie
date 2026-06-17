@@ -1,18 +1,6 @@
 ---
 import { collaborations } from "../data/collaborations";
 
-// Brand initial letters for placeholder logos
-const brandInitials: Record<string, string> = {
-  "Fashion Nova": "FN",
-  "Pretty Little Thing": "PLT",
-  "Bang Energy": "BE",
-  "WOW Skin Science": "WOW",
-  "Vagy Rejuvenation": "VR",
-  "RYZE Superfoods": "RYZE",
-  "Bliss": "B",
-  "Miami Swim Week": "MSW",
-};
-
 const categoryColors: Record<string, string> = {
   "Fashion": "bg-cream text-espresso",
   "Lifestyle": "bg-mocha/10 text-mocha",
@@ -56,11 +44,16 @@ const categoryColors: Record<string, string> = {
             </span>
           </div>
 
-          {/* Brand Logo Placeholder */}
-          <div class="w-16 h-16 rounded-xl bg-cream flex items-center justify-center mb-5 group-hover:bg-mocha transition-colors duration-300">
-            <span class="font-heading font-bold text-lg text-mocha group-hover:text-white transition-colors duration-300">
-              {brandInitials[collab.name] || collab.name.charAt(0)}
-            </span>
+          {/* Brand Logo */}
+          <div class="w-16 h-16 rounded-xl overflow-hidden mb-5 shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            <img
+              src={collab.logo}
+              alt={`${collab.name} logo`}
+              class="w-full h-full object-cover"
+              loading="lazy"
+              width="64"
+              height="64"
+            />
           </div>
 
           {/* Brand Info */}
