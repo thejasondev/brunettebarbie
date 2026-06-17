@@ -5,15 +5,17 @@ interface Props {
   image?: string;
 }
 
+import profileImage from "../assets/Foto de perfil de portafolio .jpg";
+import "../styles/global.css";
+
 const {
   title = "María Elisa Lugo — Content Creator & Brand Ambassador",
   description = "Portfolio of María Elisa Lugo (@brunettebarbie.ve). Content creator and brand ambassador with 500K+ followers and 8+ years partnering with global brands like Fashion Nova, Pretty Little Thing, and Bang Energy.",
-  image = "/og-image.jpg",
+  image = new URL("/og-image.png", Astro.site).toString(),
 } = Astro.props;
 
-import "../styles/global.css";
-
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const resolvedProfileImage = new URL(profileImage.src, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -31,14 +33,28 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="María Elisa Lugo" />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#3d3226" />
+
+    <!-- Mobile Web App Capability -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="BrunetteBarbie" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
+    
+    <!-- Open Graph Profile Details -->
+    <meta property="og:profile:first_name" content="María Elisa" />
+    <meta property="og:profile:last_name" content="Lugo" />
+    <meta property="og:profile:username" content="brunettebarbie.ve" />
+    <meta property="og:profile:gender" content="female" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -56,7 +72,25 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         "name": "María Elisa Lugo",
         "alternateName": "brunettebarbie.ve",
         "description": "Content Creator & Brand Ambassador with 500K+ community",
-        "url": "https://brunettebarbie.vercel.app",
+        "url": Astro.site ? Astro.site.toString() : "https://brunettebarbie.vercel.app",
+        "image": resolvedProfileImage,
+        "gender": "Female",
+        "nationality": {
+          "@type": "Country",
+          "name": "Venezuela"
+        },
+        "knowsLanguage": [
+          {
+            "@type": "Language",
+            "name": "Spanish",
+            "alternateName": "es"
+          },
+          {
+            "@type": "Language",
+            "name": "English",
+            "alternateName": "en"
+          }
+        ],
         "sameAs": [
           "https://www.instagram.com/brunettebarbie.ve"
         ],
@@ -66,7 +100,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       }
     })} />
 
-    <!-- Google Fonts Preconnect -->
+    <!-- DNS Prefetch & Preconnect for Google Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
