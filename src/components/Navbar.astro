@@ -42,36 +42,15 @@ const navLinks = [
         </a>
       </div>
 
-      <!-- Mobile Hamburger -->
-      <button
-        id="hamburger-btn"
-        class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-      >
-        <span class="hamburger-line block w-6 h-0.5 bg-dark rounded-full"></span>
-        <span class="hamburger-line block w-6 h-0.5 bg-dark rounded-full"></span>
-        <span class="hamburger-line block w-4 h-0.5 bg-dark rounded-full ml-auto"></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="md:hidden fixed inset-0 top-20 bg-ivory/98 backdrop-blur-lg -translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-50">
-    <div class="flex flex-col items-center justify-center h-full gap-8">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="mobile-nav-link text-2xl font-heading font-semibold text-dark hover:text-mocha transition-colors duration-300"
-        >
-          {link.label}
-        </a>
-      ))}
+      <!-- Mobile CTA (replaces hamburger menu) -->
       <a
         href="#contact"
-        class="mobile-nav-link mt-4 px-8 py-3 bg-mocha text-white font-medium rounded-full hover:bg-espresso transition-all duration-300 text-lg"
+        class="md:hidden inline-flex items-center gap-1.5 px-5 py-2 bg-mocha text-white text-sm font-medium rounded-full hover:bg-espresso transition-all duration-300 active:scale-95"
       >
-        Let's Collaborate
+        Let's Talk
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+        </svg>
       </a>
     </div>
   </div>
@@ -107,34 +86,5 @@ const navLinks = [
 
     heroObserver.observe(heroSection);
   }
-
-  // Mobile menu toggle
-  const hamburger = document.getElementById("hamburger-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  hamburger?.addEventListener("click", () => {
-    const isOpen = hamburger.classList.toggle("hamburger-active");
-    hamburger.setAttribute("aria-expanded", String(isOpen));
-
-    if (isOpen) {
-      mobileMenu?.classList.remove("-translate-x-full");
-      mobileMenu?.classList.add("translate-x-0");
-      document.body.style.overflow = "hidden";
-    } else {
-      mobileMenu?.classList.add("-translate-x-full");
-      mobileMenu?.classList.remove("translate-x-0");
-      document.body.style.overflow = "";
-    }
-  });
-
-  // Close mobile menu on link click
-  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu?.classList.add("-translate-x-full");
-      mobileMenu?.classList.remove("translate-x-0");
-      hamburger?.classList.remove("hamburger-active");
-      hamburger?.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    });
-  });
 </script>
+

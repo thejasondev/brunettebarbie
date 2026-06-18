@@ -27,8 +27,88 @@ const categoryColors: Record<string, string> = {
       </p>
     </div>
 
-    <!-- Collaborations Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- ============================================ -->
+    <!-- MOBILE: Stacked Card Deck (visible < md)     -->
+    <!-- ============================================ -->
+    <div class="block md:hidden reveal" id="card-deck">
+      <div class="relative w-full" style="height: 420px;">
+        {collaborations.map((collab, index) => (
+          <a
+            href={collab.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="collab-card absolute inset-x-0 mx-auto w-[90%] max-w-sm bg-ivory rounded-2xl p-6 shadow-card border border-transparent block"
+            style={`z-index: ${collaborations.length - index};`}
+            data-index={index}
+          >
+
+            {/* Brand Logo + Info Row */}
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-14 h-14 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+                <img
+                  src={collab.logo}
+                  alt={`${collab.name} logo`}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  width="56"
+                  height="56"
+                />
+              </div>
+              <div>
+                <h3 class="font-heading text-lg font-semibold text-dark leading-tight">
+                  {collab.name}
+                </h3>
+                <span class="text-sm text-taupe">{collab.handle}</span>
+              </div>
+            </div>
+
+            {/* Category + Duration Row */}
+            <div class="flex items-center gap-2 flex-wrap mb-3">
+              <span class={`inline-block px-3 py-1 text-xs font-medium rounded-full ${categoryColors[collab.category] || "bg-cream text-espresso"}`}>
+                {collab.category}
+              </span>
+              <span class="px-3 py-1 text-xs font-semibold bg-mocha text-white rounded-full">
+                {collab.duration}
+              </span>
+            </div>
+
+            {/* Description */}
+            <p class="text-sm text-taupe/90 leading-relaxed">
+              {collab.description}
+            </p>
+
+            {/* View Brand hint */}
+            <div class="mt-4 flex items-center gap-1 text-mocha">
+              <span class="text-sm font-medium">View Brand</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Progress Dots -->
+      <div class="flex items-center justify-center gap-2 mt-8" id="deck-dots">
+        {collaborations.map((_, index) => (
+          <button
+            class="deck-dot w-2 h-2 rounded-full bg-sand/40 transition-all duration-300"
+            data-dot={index}
+            aria-label={`Go to card ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+
+      <!-- Card counter -->
+      <p class="text-center mt-4 text-taupe/60 text-xs tracking-widest uppercase">
+        <span id="deck-current">1</span> / {collaborations.length}
+      </p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DESKTOP: Original Grid (visible >= md)       -->
+    <!-- ============================================ -->
+    <div class="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
       {collaborations.map((collab, index) => (
         <a
           href={collab.url}
@@ -91,3 +171,195 @@ const categoryColors: Record<string, string> = {
     </div>
   </div>
 </section>
+
+<style>
+  /* ===== Stacked Card Deck Styles ===== */
+  .collab-card {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center bottom;
+    will-change: transform, opacity;
+  }
+
+  /* Active card — front of the deck */
+  .collab-card[data-state="active"] {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    z-index: 10 !important;
+    box-shadow: 0 8px 40px rgba(90, 77, 63, 0.15);
+  }
+
+  /* Next card — peeking behind */
+  .collab-card[data-state="next"] {
+    transform: translateY(12px) scale(0.96);
+    opacity: 0.7;
+    z-index: 9 !important;
+    pointer-events: none;
+  }
+
+  /* Two behind — further back */
+  .collab-card[data-state="behind"] {
+    transform: translateY(24px) scale(0.92);
+    opacity: 0.4;
+    z-index: 8 !important;
+    pointer-events: none;
+  }
+
+  /* All other cards — hidden in deck */
+  .collab-card[data-state="hidden"] {
+    transform: translateY(36px) scale(0.88);
+    opacity: 0;
+    z-index: 1 !important;
+    pointer-events: none;
+  }
+
+  /* Card exiting — flies up and fades out */
+  .collab-card[data-state="exiting"] {
+    transform: translateY(-30px) scale(0.95);
+    opacity: 0;
+    z-index: 11 !important;
+    pointer-events: none;
+  }
+
+  /* Active dot indicator */
+  .deck-dot[data-active="true"] {
+    width: 1.5rem;
+    background-color: var(--color-mocha);
+  }
+</style>
+
+<script>
+  function initCardDeck() {
+    const deck = document.getElementById("card-deck");
+    if (!deck) return;
+
+    const cards = deck.querySelectorAll<HTMLElement>(".collab-card");
+    const dots = deck.querySelectorAll<HTMLElement>(".deck-dot");
+    const counterEl = document.getElementById("deck-current");
+    const total = cards.length;
+
+    if (total === 0) return;
+
+    let current = 0;
+    let autoTimer: ReturnType<typeof setInterval>;
+    let isPaused = false;
+
+    function setCardStates(activeIndex: number, animate = true) {
+      cards.forEach((card, i) => {
+        const diff = (i - activeIndex + total) % total;
+        if (diff === 0) {
+          card.dataset.state = "active";
+        } else if (diff === 1) {
+          card.dataset.state = "next";
+        } else if (diff === 2) {
+          card.dataset.state = "behind";
+        } else {
+          card.dataset.state = "hidden";
+        }
+      });
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.dataset.active = i === activeIndex ? "true" : "false";
+      });
+
+      // Update counter
+      if (counterEl) {
+        counterEl.textContent = String(activeIndex + 1);
+      }
+    }
+
+    function goToCard(index: number) {
+      // Animate exit of current card
+      const currentCard = cards[current] as HTMLElement;
+      currentCard.dataset.state = "exiting";
+
+      // After brief exit animation, set new states
+      setTimeout(() => {
+        current = index;
+        setCardStates(current);
+      }, 150);
+    }
+
+    function nextCard() {
+      const next = (current + 1) % total;
+      goToCard(next);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoTimer = setInterval(() => {
+        if (!isPaused) nextCard();
+      }, 4000);
+    }
+
+    function stopAutoPlay() {
+      if (autoTimer) clearInterval(autoTimer);
+    }
+
+    // Initialize states
+    setCardStates(0, false);
+
+    // Start auto-play
+    startAutoPlay();
+
+    // Dot click navigation
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (i !== current) {
+          goToCard(i);
+          startAutoPlay(); // Reset timer on manual navigation
+        }
+      });
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    deck.addEventListener("touchstart", (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      isPaused = true;
+    }, { passive: true });
+
+    deck.addEventListener("touchend", (e: TouchEvent) => {
+      const deltaX = e.changedTouches[0].clientX - touchStartX;
+      const deltaY = e.changedTouches[0].clientY - touchStartY;
+
+      // Only respond to horizontal swipes (not vertical scroll)
+      if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+          // Swipe left → next
+          nextCard();
+        } else {
+          // Swipe right → previous
+          const prev = (current - 1 + total) % total;
+          goToCard(prev);
+        }
+      }
+
+      isPaused = false;
+      startAutoPlay();
+    }, { passive: true });
+
+    // Pause on touch hold
+    deck.addEventListener("touchstart", () => { isPaused = true; }, { passive: true });
+
+    // Visibility API — pause when tab not visible
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAutoPlay();
+      } else {
+        startAutoPlay();
+      }
+    });
+  }
+
+  // Run on DOM ready
+  document.addEventListener("DOMContentLoaded", initCardDeck);
+  // Also handle Astro view transitions
+  document.addEventListener("astro:page-load", initCardDeck);
+</script>
