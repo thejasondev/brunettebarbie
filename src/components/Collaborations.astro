@@ -16,7 +16,7 @@ const categoryColors: Record<string, string> = {
 
   <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-16 reveal">
+    <div class="text-center mb-10 md:mb-16 reveal">
       <span class="text-taupe text-sm tracking-[0.3em] uppercase font-medium block mb-3">Trusted by Global Brands</span>
       <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl text-dark font-bold mb-2">
         My <span class="text-mocha italic">Collaborations</span>
@@ -31,7 +31,7 @@ const categoryColors: Record<string, string> = {
     <!-- MOBILE: Stacked Card Deck (visible < md)     -->
     <!-- ============================================ -->
     <div class="block md:hidden reveal" id="card-deck">
-      <div class="relative w-full" style="height: 420px;">
+      <div class="relative w-full" style="height: 350px;">
         {collaborations.map((collab, index) => (
           <a
             href={collab.url}
@@ -87,22 +87,6 @@ const categoryColors: Record<string, string> = {
           </a>
         ))}
       </div>
-
-      <!-- Progress Dots -->
-      <div class="flex items-center justify-center gap-2 mt-8" id="deck-dots">
-        {collaborations.map((_, index) => (
-          <button
-            class="deck-dot w-2 h-2 rounded-full bg-sand/40 transition-all duration-300"
-            data-dot={index}
-            aria-label={`Go to card ${index + 1}`}
-          ></button>
-        ))}
-      </div>
-
-      <!-- Card counter -->
-      <p class="text-center mt-4 text-taupe/60 text-xs tracking-widest uppercase">
-        <span id="deck-current">1</span> / {collaborations.length}
-      </p>
     </div>
 
     <!-- ============================================ -->
@@ -164,7 +148,7 @@ const categoryColors: Record<string, string> = {
     </div>
 
     <!-- Bottom Note -->
-    <div class="text-center mt-16 reveal">
+    <div class="text-center mt-12 md:mt-16 reveal">
       <p class="text-taupe text-base italic font-accent text-lg">
         "Every partnership I take on is built to last — because real influence takes time."
       </p>
@@ -222,11 +206,6 @@ const categoryColors: Record<string, string> = {
     pointer-events: none;
   }
 
-  /* Active dot indicator */
-  .deck-dot[data-active="true"] {
-    width: 1.5rem;
-    background-color: var(--color-mocha);
-  }
 </style>
 
 <script>
@@ -235,8 +214,6 @@ const categoryColors: Record<string, string> = {
     if (!deck) return;
 
     const cards = deck.querySelectorAll<HTMLElement>(".collab-card");
-    const dots = deck.querySelectorAll<HTMLElement>(".deck-dot");
-    const counterEl = document.getElementById("deck-current");
     const total = cards.length;
 
     if (total === 0) return;
@@ -258,16 +235,6 @@ const categoryColors: Record<string, string> = {
           card.dataset.state = "hidden";
         }
       });
-
-      // Update dots
-      dots.forEach((dot, i) => {
-        dot.dataset.active = i === activeIndex ? "true" : "false";
-      });
-
-      // Update counter
-      if (counterEl) {
-        counterEl.textContent = String(activeIndex + 1);
-      }
     }
 
     function goToCard(index: number) {
@@ -303,17 +270,6 @@ const categoryColors: Record<string, string> = {
 
     // Start auto-play
     startAutoPlay();
-
-    // Dot click navigation
-    dots.forEach((dot, i) => {
-      dot.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (i !== current) {
-          goToCard(i);
-          startAutoPlay(); // Reset timer on manual navigation
-        }
-      });
-    });
 
     // Touch/swipe support
     let touchStartX = 0;
