@@ -1,0 +1,444 @@
+---
+const videos = [
+  { src: "/video-collab/promo1.mp4", label: "Content Highlight 1" },
+  { src: "/video-collab/promo2.mp4", label: "Content Highlight 2" },
+];
+---
+
+<section id="showcase" class="py-20 md:py-28 bg-white relative overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cream/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute bottom-0 right-0 w-72 h-72 bg-sand/10 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-12 md:mb-16 reveal">
+      <span class="text-taupe text-sm tracking-[0.3em] uppercase font-medium block mb-3">See It in Action</span>
+      <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl text-dark font-bold mb-2">
+        Content <span class="text-mocha italic">Highlights</span>
+      </h2>
+      <div class="w-16 h-0.5 bg-mocha mx-auto mt-6 mb-6"></div>
+      <p class="max-w-2xl mx-auto text-taupe text-lg">
+        A glimpse into how I bring brands to life through authentic, high-quality storytelling.
+      </p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MOBILE: iPhone Carousel (< 768px)           -->
+    <!-- ============================================ -->
+    <div class="block md:hidden reveal">
+      <div class="showcase-carousel" id="phone-carousel">
+        {videos.map((video) => (
+          <div class="showcase-slide">
+            <div class="portfolio-card">
+              <div class="portfolio-device-wrapper portfolio-device-wrapper--phone">
+                <div class="device device-iphone-14-pro">
+                  <div class="device-frame">
+                    <div class="device-screen" style="position: relative; cursor: pointer;" data-video-src={video.src}>
+                      <video
+                        src={`${video.src}#t=0.001`}
+                        muted
+                        playsinline
+                        webkit-playsinline="true"
+                        preload="metadata"
+                        style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                      ></video>
+                      <div class="portfolio-play-overlay">
+                        <div class="portfolio-play-btn">
+                          <svg class="w-6 h-6 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="device-stripe"></div>
+                  <div class="device-header"></div>
+                  <div class="device-sensors"></div>
+                  <div class="device-btns"></div>
+                  <div class="device-power"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- TABLET: 2 iPad Pros Side-by-Side (768px - 1023px) -->
+    <!-- ============================================ -->
+    <div class="hidden md:grid md:grid-cols-2 lg:hidden gap-6 reveal">
+      {videos.map((video) => (
+        <div class="portfolio-card">
+          <div class="portfolio-device-wrapper portfolio-device-wrapper--tablet">
+            <div class="device device-ipad-pro">
+              <div class="device-frame">
+                <div class="device-screen" style="position: relative; cursor: pointer;" data-video-src={video.src}>
+                  <video
+                    src={`${video.src}#t=0.001`}
+                    muted
+                    playsinline
+                    webkit-playsinline="true"
+                    preload="metadata"
+                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                  ></video>
+                  <div class="portfolio-play-overlay">
+                    <div class="portfolio-play-btn">
+                      <svg class="w-7 h-7 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="device-home"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- ============================================ -->
+    <!-- DESKTOP: 2 MacBook Pros Side-by-Side (>= 1024px) -->
+    <!-- ============================================ -->
+    <div class="hidden lg:grid lg:grid-cols-2 gap-8 reveal">
+      {videos.map((video) => (
+        <div class="portfolio-card">
+          <div class="portfolio-device-wrapper portfolio-device-wrapper--desktop">
+            <div class="device device-macbook-pro">
+              <div class="device-frame">
+                <div class="device-screen" style="position: relative; cursor: pointer;" data-video-src={video.src}>
+                  <video
+                    src={`${video.src}#t=0.001`}
+                    muted
+                    playsinline
+                    webkit-playsinline="true"
+                    preload="metadata"
+                    style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                  ></video>
+                  <div class="portfolio-play-overlay">
+                    <div class="portfolio-play-btn">
+                      <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="device-stripe"></div>
+              <div class="device-header"></div>
+              <div class="device-sensors"></div>
+              <div class="device-btns"></div>
+              <div class="device-power"></div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FULLSCREEN VIDEO MODAL                       -->
+  <!-- ============================================ -->
+  <div id="video-modal" class="showcase-modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <button id="modal-close-btn" class="showcase-modal-close" aria-label="Close video">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="relative max-w-4xl w-full mx-4 flex items-center justify-center">
+      <video id="modal-video" class="showcase-modal-video" controls playsinline autoplay preload="auto"></video>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- STYLES (from devices-css-video-integration.md) -->
+<!-- ============================================ -->
+<style is:global>
+  /* Card principal */
+  .portfolio-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Wrapper con corte de desbordamiento */
+  .portfolio-device-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  /* Centrado absoluto del dispositivo */
+  .portfolio-device-wrapper .device {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    z-index: 1;
+  }
+
+  /* --- Phone (Mobile: < 768px) --- */
+  .portfolio-device-wrapper--phone {
+    height: 500px;
+  }
+  .portfolio-device-wrapper--phone .device {
+    transform: translate(-50%, -50%) scale(0.54);
+  }
+
+  @media (max-width: 380px) {
+    .portfolio-device-wrapper--phone {
+      height: 450px;
+    }
+    .portfolio-device-wrapper--phone .device {
+      transform: translate(-50%, -50%) scale(0.48);
+    }
+  }
+
+  /* --- Tablet (iPad: 768px – 1023px) --- */
+  .portfolio-device-wrapper--tablet {
+    height: 450px;
+  }
+  .portfolio-device-wrapper--tablet .device {
+    transform: translate(-50%, -50%) scale(0.54);
+  }
+
+  /* --- Desktop (MacBook: >= 1024px) --- */
+  .portfolio-device-wrapper--desktop {
+    height: 340px;
+  }
+  .portfolio-device-wrapper--desktop .device {
+    transform: translate(-50%, -50%) scale(0.52);
+  }
+
+  @media (min-width: 1280px) {
+    .portfolio-device-wrapper--desktop {
+      height: 380px;
+    }
+    .portfolio-device-wrapper--desktop .device {
+      transform: translate(-50%, -50%) scale(0.60);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .portfolio-device-wrapper--desktop {
+      height: 420px;
+    }
+    .portfolio-device-wrapper--desktop .device {
+      transform: translate(-50%, -50%) scale(0.68);
+    }
+  }
+
+  /* Ajuste del Video a la Pantalla (.device-screen) */
+  .device-screen {
+    object-fit: cover;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* WebKit/Safari Fixes */
+  .device-frame {
+    overflow: hidden !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  .device-iphone-14-pro .device-frame,
+  .device-iphone-14-pro .device-screen,
+  .device-iphone-14-pro video {
+    border-radius: 46px !important;
+  }
+
+  .device-ipad-pro .device-frame,
+  .device-ipad-pro .device-screen,
+  .device-ipad-pro video {
+    border-radius: 24px !important;
+  }
+
+  .device-macbook-pro .device-frame,
+  .device-macbook-pro .device-screen,
+  .device-macbook-pro video {
+    border-radius: 0 0 4px 4px !important;
+  }
+
+  /* Mobile Carousel */
+  .showcase-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .showcase-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .showcase-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Portfolio Play Overlay & Button */
+  .portfolio-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.25);
+    transition: background-color 0.3s ease;
+    z-index: 10;
+  }
+
+  .device-screen:hover .portfolio-play-overlay {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .portfolio-play-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-dark);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .device-screen:hover .portfolio-play-btn {
+    transform: scale(1.1);
+  }
+
+  /* Fullscreen Video Modal */
+  .showcase-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20, 16, 12, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .showcase-modal.is-open {
+    display: flex;
+  }
+
+  .showcase-modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    z-index: 210;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .showcase-modal-close:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .showcase-modal-video {
+    max-width: 90vw;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    outline: none;
+    background: #000;
+  }
+
+  @media (min-width: 768px) {
+    .showcase-modal-close {
+      top: 1.75rem;
+      right: 1.75rem;
+    }
+  }
+</style>
+
+<!-- ============================================ -->
+<!-- CLIENT-SIDE JAVASCRIPT                       -->
+<!-- ============================================ -->
+<script>
+  function initVideoShowcase() {
+    const modal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video') as HTMLVideoElement | null;
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    if (!modal || !modalVideo || !modalCloseBtn) return;
+
+    function openModal(rawSrc: string) {
+      if (!modalVideo) return;
+      const cleanSrc = rawSrc.split('#')[0];
+      modalVideo.src = cleanSrc;
+      modalVideo.load();
+      modal!.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+
+      const playPromise = modalVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn('Video play interrupted:', err);
+        });
+      }
+    }
+
+    function closeModal() {
+      if (!modalVideo) return;
+      modalVideo.pause();
+      modalVideo.removeAttribute('src');
+      modalVideo.load();
+      modal!.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    // Attach click events to device screens
+    document.querySelectorAll<HTMLElement>('.device-screen').forEach((screen) => {
+      screen.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const src = screen.dataset.videoSrc;
+        if (src) {
+          openModal(src);
+        }
+      });
+    });
+
+    // Close modal handlers
+    modalCloseBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Escape key listener
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  }
+
+  // Run on DOM ready and Astro page transitions
+  document.addEventListener('DOMContentLoaded', initVideoShowcase);
+  document.addEventListener('astro:page-load', initVideoShowcase);
+</script>
