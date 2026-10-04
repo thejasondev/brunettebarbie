@@ -5,100 +5,159 @@ interface Props {
   image?: string;
 }
 
-import profileImage from "../assets/Foto de perfil de portafolio .jpg";
+import profileImage from "../assets/maria-swindell.webp";
 import "../styles/global.css";
 import "devices.css";
 
 const {
-  title = "María Elisa Lugo — Content Creator & Brand Ambassador",
-  description = "Portfolio of María Elisa Lugo (@brunettebarbie.ve). Content creator and brand ambassador with 500K+ followers and 8+ years partnering with global brands like Fashion Nova, Pretty Little Thing, and Bang Energy.",
+  title = "Maria Swindell | Official Portfolio — Fashion, Beauty & Brand Ambassador",
+  description = "Official portfolio of Maria Swindell (@mariaswindell_official). U.S.-based fashion, beauty, and luxury lifestyle content creator partnering with premier global brands like Saint Laurent, Fashion Nova, PrettyLittleThing, and YSL.",
   image = new URL("/og-image.png", Astro.site).toString(),
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const resolvedProfileImage = new URL(profileImage.src, Astro.site).toString();
----
+const siteUrl = Astro.site ? Astro.site.toString() : "https://mariaswindell.vercel.app";
+---...
+
 
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Favicon & Touch Icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Primary Meta Tags -->
+    <!-- Primary SEO Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="keywords" content="Maria Swindell, mariaswindell_official, maria.swindell, Maria Swindell portfolio, content creator, brand ambassador, fashion influencer, beauty creator, brunettebarbie, brunettebarbie.ve, luxury brand partnerships, fashion model" />
+    <meta name="author" content="Maria Swindell" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="author" content="María Elisa Lugo" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#3d3226" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="theme-color" content="#241c15" />
 
     <!-- Mobile Web App Capability -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="BrunetteBarbie" />
+    <meta name="apple-mobile-web-app-title" content="Maria Swindell" />
+    <meta name="application-name" content="Maria Swindell" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Maria Swindell" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:image:secure_url" content={image} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Maria Swindell — Content Creator & Brand Ambassador" />
     <meta property="og:locale" content="en_US" />
     
-    <!-- Open Graph Profile Details -->
-    <meta property="og:profile:first_name" content="María Elisa" />
-    <meta property="og:profile:last_name" content="Lugo" />
-    <meta property="og:profile:username" content="brunettebarbie.ve" />
+    <!-- Open Graph Profile Entity Details -->
+    <meta property="og:profile:first_name" content="Maria" />
+    <meta property="og:profile:last_name" content="Swindell" />
+    <meta property="og:profile:username" content="mariaswindell_official" />
     <meta property="og:profile:gender" content="female" />
 
-    <!-- Twitter -->
+    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mariaswindell_official" />
+    <meta name="twitter:creator" content="@mariaswindell_official" />
     <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content="Maria Swindell — Content Creator & Brand Ambassador" />
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Google Knowledge Graph Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "ProfilePage",
-      "mainEntity": {
-        "@type": "Person",
-        "name": "María Elisa Lugo",
-        "alternateName": "brunettebarbie.ve",
-        "description": "Content Creator & Brand Ambassador with 500K+ community",
-        "url": Astro.site ? Astro.site.toString() : "https://brunettebarbie.vercel.app",
-        "image": resolvedProfileImage,
-        "gender": "Female",
-        "nationality": {
-          "@type": "Country",
-          "name": "Venezuela"
-        },
-        "knowsLanguage": [
-          {
-            "@type": "Language",
-            "name": "Spanish",
-            "alternateName": "es"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": `${siteUrl}/#person`,
+          "name": "Maria Swindell",
+          "alternateName": [
+            "mariaswindell_official",
+            "maria.swindell",
+            "brunettebarbie",
+            "brunettebarbie.ve",
+            "María Elisa Lugo"
+          ],
+          "description": "Maria Swindell is a fashion, beauty, and luxury lifestyle content creator and brand ambassador partnering with premier global brands.",
+          "url": siteUrl,
+          "image": resolvedProfileImage,
+          "gender": "Female",
+          "nationality": {
+            "@type": "Country",
+            "name": "Venezuela"
           },
-          {
-            "@type": "Language",
-            "name": "English",
-            "alternateName": "en"
+          "knowsLanguage": [
+            {
+              "@type": "Language",
+              "name": "Spanish",
+              "alternateName": "es"
+            },
+            {
+              "@type": "Language",
+              "name": "English",
+              "alternateName": "en"
+            }
+          ],
+          "sameAs": [
+            "https://www.instagram.com/mariaswindell_official",
+            "https://www.tiktok.com/@maria.swindell"
+          ],
+          "jobTitle": "Content Creator & Brand Ambassador",
+          "knowsAbout": [
+            "High Fashion",
+            "Beauty & Skincare",
+            "Luxury Lifestyle",
+            "Content Creation",
+            "Brand Ambassadorship",
+            "Digital Storytelling"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          "url": siteUrl,
+          "name": "Maria Swindell | Official Portfolio",
+          "description": "Official portfolio of Maria Swindell — Content Creator & Brand Ambassador",
+          "publisher": {
+            "@id": `${siteUrl}/#person`
           }
-        ],
-        "sameAs": [
-          "https://www.instagram.com/brunettebarbie.ve"
-        ],
-        "jobTitle": "Content Creator & Brand Ambassador",
-        "email": "barbiebusiness.contact@gmail.com",
-        "knowsAbout": ["Fashion", "Beauty", "Lifestyle", "Wellness", "Content Creation"]
-      }
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": `${siteUrl}/#webpage`,
+          "url": siteUrl,
+          "name": title,
+          "description": description,
+          "isPartOf": {
+            "@id": `${siteUrl}/#website`
+          },
+          "mainEntity": {
+            "@id": `${siteUrl}/#person`
+          },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": image
+          }
+        }
+      ]
     })} />
 
     <!-- DNS Prefetch & Preconnect for Google Fonts -->

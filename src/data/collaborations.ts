@@ -31,14 +31,14 @@ export const collaborations: Collaboration[] = [
     logo: "/logo-collab/plt.webp",
   },
   {
-    name: "Bang Energy",
-    handle: "@bangenergy",
-    duration: "4 Years",
-    years: 4,
-    description: "Brand ambassador representing an active, energetic lifestyle through dynamic content creation and event appearances.",
-    category: "Lifestyle",
-    url: "https://www.bangenergy.com",
-    logo: "/logo-collab/bang.webp",
+    name: "Saint Laurent",
+    handle: "@ysl",
+    duration: "2 Years",
+    years: 2,
+    description: "Luxury fashion partnership showcasing iconic pieces through high-end editorial content and exclusive brand experiences.",
+    category: "Fashion",
+    url: "https://www.ysl.com",
+    logo: "/logo-collab/ysl.webp",
   },
   {
     name: "WOW Skin Science",
@@ -67,42 +67,113 @@ export const collaborations: Collaboration[] = [
     years: 2,
     description: "Health-conscious partnership creating engaging content around mushroom coffee and daily wellness rituals.",
     category: "Wellness",
-    url: "https://www.rfryzesuperfoods.com",
+    url: "https://www.ryzesuperfoods.com",
     logo: "/logo-collab/ryze.webp",
   },
   {
-    name: "Bliss",
-    handle: "@bliss",
+    name: "Blissy",
+    handle: "@blissy",
     duration: "2 Years",
     years: 2,
-    description: "Skincare collaboration highlighting clean beauty products through lifestyle-integrated, approachable content.",
-    category: "Beauty & Skincare",
-    url: "https://www.blissworld.com",
-    logo: "/logo-collab/bliss.webp",
+    description: "Luxury silk pillowcase brand partnership creating lifestyle content focused on beauty sleep and self-care essentials.",
+    category: "Lifestyle",
+    url: "https://www.blissy.com",
+    logo: "/logo-collab/blissy.webp",
   },
   {
-    name: "Miami Swim Week",
-    handle: "@miamiswimweekshows",
-    duration: "2024 & 2025",
-    years: 2,
-    description: "Featured in runway shows and brand activations, collaborating indirectly with multiple swimwear and fashion labels during the event.",
-    category: "Fashion Events",
-    url: "https://www.miamiswimweek.com",
-    logo: "/logo-collab/miamiswinweek.webp",
+    name: "Kulfi Beauty",
+    handle: "@kulfibeauty",
+    duration: "1 Year",
+    years: 1,
+    description: "Inclusive beauty brand collaboration highlighting vibrant, high-pigment products designed to celebrate diverse skin tones.",
+    category: "Beauty & Skincare",
+    url: "https://www.kulfibeauty.com",
+    logo: "/logo-collab/kulfi.webp",
+  },
+  {
+    name: "Nayrosa Beauty",
+    handle: "@nayrosabeauty",
+    duration: "1 Year",
+    years: 1,
+    description: "Skincare partnership centered on self-care rituals and clean beauty routines with premium, naturally-inspired formulas.",
+    category: "Beauty & Skincare",
+    url: "https://www.nayrosabeauty.com",
+    logo: "/logo-collab/nayrosa.webp",
+  },
+  {
+    name: "Ultra Violette",
+    handle: "@ultraviolette",
+    duration: "1 Year",
+    years: 1,
+    description: "Australian SPF brand collaboration creating content around sun protection as an essential part of every beauty routine.",
+    category: "Beauty & Skincare",
+    url: "https://www.ultraviolette.com.au",
+    logo: "/logo-collab/ultraviolette.webp",
+  },
+  {
+    name: "Comfrt",
+    handle: "@comfrt",
+    duration: "1 Year",
+    years: 1,
+    description: "Wellness lifestyle brand partnership creating cozy, authentic content around everyday comfort and mindful living.",
+    category: "Lifestyle",
+    url: "https://www.comfrt.com",
+    logo: "/logo-collab/comfrt.webp",
+  },
+  {
+    name: "Capital Skin",
+    handle: "@capitalskin",
+    duration: "1 Year",
+    years: 1,
+    description: "Premium skincare clinic partnership creating educational content around professional treatments and results-driven skincare.",
+    category: "Beauty & Skincare",
+    url: "https://www.capitalskin.com",
+    logo: "/logo-collab/cs.webp",
   },
 ];
 
-export interface Stat {
-  countTo: number;
-  suffix: string;
-  prefix: string;
-  label: string;
-  icon: string;
+export interface Testimonial {
+  brand: string;
+  logo: string;
+  quote: string;
+  author: string;
+  role: string;
 }
 
-export const stats: Stat[] = [
-  { countTo: 500, suffix: "K+", prefix: "", label: "Followers", icon: "community" },
-  { countTo: 8, suffix: "+", prefix: "", label: "Brand Partnerships", icon: "handshake" },
-  { countTo: 8, suffix: "+", prefix: "", label: "Years of Experience", icon: "calendar" },
-  { countTo: 0, suffix: "", prefix: "Global", label: "Audience Reach", icon: "globe" },
+export const testimonials: Testimonial[] = [
+  {
+    brand: "Fashion Nova",
+    logo: "/logo-collab/fashionnova.webp",
+    quote: "Maria consistently delivers content that exceeds our expectations. Her creativity and professionalism make her one of our most valued long-term ambassadors.",
+    author: "Fashion Nova Team",
+    role: "Brand Partnerships",
+  },
+  {
+    brand: "Pretty Little Thing",
+    logo: "/logo-collab/plt.webp",
+    quote: "Working with Maria has been incredible. Her ability to style our pieces and connect with her audience brings real, measurable results every campaign.",
+    author: "PLT Collaborations",
+    role: "Influencer Marketing",
+  },
+  {
+    brand: "Saint Laurent",
+    logo: "/logo-collab/ysl.webp",
+    quote: "Maria embodies the essence of our brand. Her editorial approach and attention to detail create content that feels both authentic and luxurious.",
+    author: "YSL Digital Team",
+    role: "Digital Marketing",
+  },
+  {
+    brand: "WOW Skin Science",
+    logo: "/logo-collab/wowskinscience.webp",
+    quote: "Maria's genuine passion for skincare shines through every piece of content. Her audience trust translates directly into engagement and conversions.",
+    author: "WOW Skin Science",
+    role: "Creator Relations",
+  },
+  {
+    brand: "Kulfi Beauty",
+    logo: "/logo-collab/kulfi.webp",
+    quote: "Maria's content for Kulfi was vibrant, inclusive, and perfectly aligned with our brand values. She brought our products to life in the most beautiful way.",
+    author: "Kulfi Beauty",
+    role: "Brand Marketing",
+  },
 ];

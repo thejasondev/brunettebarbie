@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+import fs from 'node:fs';
+import sharp from 'sharp';
+
+// 1. Create luxury SVG Favicon
+const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
     <!-- Background Gradient: Deep Mocha / Espresso Obsidian -->
     <linearGradient id="msBg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -45,4 +49,20 @@
   <!-- Luxury Haute Star Accent (Top Right) -->
   <path d="M 50 8.5 C 50 11.2, 51.5 12.5, 54 12.5 C 51.5 12.5, 50 13.8, 50 16.5 C 50 13.8, 48.5 12.5, 46 12.5 C 48.5 12.5, 50 11.2, 50 8.5 Z" fill="#ffffff" opacity="0.95"/>
   <circle cx="50" cy="12.5" r="0.75" fill="#fdf4e8"/>
-</svg>
+</svg>`;
+
+fs.writeFileSync('public/favicon.svg', faviconSvg);
+console.log('Saved public/favicon.svg');
+
+// Generate apple-touch-icon.png (180x180) and preview PNG
+await sharp(Buffer.from(faviconSvg))
+  .resize(180, 180)
+  .png()
+  .toFile('public/apple-touch-icon.png');
+console.log('Saved public/apple-touch-icon.png');
+
+await sharp(Buffer.from(faviconSvg))
+  .resize(256, 256)
+  .png()
+  .toFile('public/favicon-preview.png');
+console.log('Saved public/favicon-preview.png');

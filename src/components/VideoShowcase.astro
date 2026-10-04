@@ -1,7 +1,8 @@
 ---
 const videos = [
-  { src: "/video-collab/promo1.mp4", label: "Content Highlight 1" },
-  { src: "/video-collab/promo2.mp4", label: "Content Highlight 2" },
+  { src: "/video-collab/color.mp4", label: "Color Campaign" },
+  { src: "/video-collab/vagy.mp4", label: "Vagy Collaboration" },
+  { src: "/video-collab/ysl.mp4", label: "YSL Partnership" },
 ];
 ---
 
@@ -24,7 +25,7 @@ const videos = [
     </div>
 
     <!-- ============================================ -->
-    <!-- MOBILE: iPhone Carousel (< 768px)           -->
+    <!-- MOBILE: iPhone Carousel (< 768px) — 1 video -->
     <!-- ============================================ -->
     <div class="block md:hidden reveal">
       <div class="showcase-carousel" id="phone-carousel">
@@ -64,10 +65,10 @@ const videos = [
     </div>
 
     <!-- ============================================ -->
-    <!-- TABLET: 2 iPad Pros Side-by-Side (768px - 1023px) -->
+    <!-- TABLET: 2 iPad Pros (768px - 1023px)        -->
     <!-- ============================================ -->
     <div class="hidden md:grid md:grid-cols-2 lg:hidden gap-6 reveal">
-      {videos.map((video) => (
+      {videos.slice(0, 2).map((video) => (
         <div class="portfolio-card">
           <div class="portfolio-device-wrapper portfolio-device-wrapper--tablet">
             <div class="device device-ipad-pro">
@@ -96,9 +97,9 @@ const videos = [
     </div>
 
     <!-- ============================================ -->
-    <!-- DESKTOP: 2 MacBook Pros Side-by-Side (>= 1024px) -->
+    <!-- DESKTOP: 3 MacBook Pros (>= 1024px)         -->
     <!-- ============================================ -->
-    <div class="hidden lg:grid lg:grid-cols-2 gap-8 reveal">
+    <div class="hidden lg:grid lg:grid-cols-3 gap-6 reveal">
       {videos.map((video) => (
         <div class="portfolio-card">
           <div class="portfolio-device-wrapper portfolio-device-wrapper--desktop">
