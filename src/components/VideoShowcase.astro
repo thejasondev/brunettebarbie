@@ -25,7 +25,7 @@ const videos = [
     </div>
 
     <!-- ============================================ -->
-    <!-- MOBILE: iPhone Carousel (< 768px) — 1 video -->
+    <!-- MOBILE: iPhone Carousel (< 768px) — snap   -->
     <!-- ============================================ -->
     <div class="block md:hidden reveal">
       <div class="showcase-carousel" id="phone-carousel">
@@ -61,6 +61,13 @@ const videos = [
             </div>
           </div>
         ))}
+      </div>
+      <!-- Scroll hint -->
+      <div class="flex items-center justify-center gap-1.5 mt-4 text-taupe/70">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9L12 12.75 15.75 9M8.25 15L12 18.75 15.75 15"/>
+        </svg>
+        <span class="text-xs tracking-wide">Swipe to see more</span>
       </div>
     </div>
 
@@ -263,11 +270,13 @@ const videos = [
   /* Mobile Carousel */
   .showcase-carousel {
     display: flex;
+    gap: 1rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    padding: 0 1rem;
   }
 
   .showcase-carousel::-webkit-scrollbar {
@@ -275,7 +284,7 @@ const videos = [
   }
 
   .showcase-slide {
-    flex: 0 0 100%;
+    flex: 0 0 85%;
     scroll-snap-align: center;
     display: flex;
     justify-content: center;

@@ -1,12 +1,20 @@
 ---
 import { collaborations } from "../data/collaborations";
 
-const categoryColors: Record<string, string> = {
-  "Fashion": "bg-cream text-espresso",
-  "Lifestyle": "bg-mocha/10 text-mocha",
-  "Beauty & Skincare": "bg-sand/40 text-espresso",
-  "Wellness": "bg-taupe/10 text-taupe",
-  "Fashion Events": "bg-cream text-espresso",
+const categoryChip: Record<string, string> = {
+  "Fashion": "bg-cream text-espresso border-sand/40",
+  "Lifestyle": "bg-mocha/10 text-mocha border-mocha/20",
+  "Beauty & Skincare": "bg-sand/40 text-espresso border-sand/50",
+  "Wellness": "bg-taupe/15 text-taupe border-taupe/25",
+  "Fashion Events": "bg-cream text-espresso border-sand/40",
+};
+
+const categoryDot: Record<string, string> = {
+  "Fashion": "bg-mocha",
+  "Lifestyle": "bg-mocha",
+  "Beauty & Skincare": "bg-sand",
+  "Wellness": "bg-taupe",
+  "Fashion Events": "bg-mocha",
 };
 ---
 
@@ -31,10 +39,10 @@ const categoryColors: Record<string, string> = {
     <!-- MOBILE: Stacked Card Deck (visible < md)     -->
     <!-- ============================================ -->
     <div class="block md:hidden reveal" id="card-deck">
-      <div class="relative w-full" style="height: 350px;">
+      <div class="relative w-full" id="card-deck-stage" style="height: 470px;">
         {collaborations.map((collab, index) => (
           <a
-            href={collab.url}
+            href={collab.driveUrl || collab.url}
             target="_blank"
             rel="noopener noreferrer"
             class="collab-card absolute inset-x-0 mx-auto w-[90%] max-w-sm bg-ivory rounded-2xl p-6 shadow-card border border-transparent block"
@@ -64,7 +72,8 @@ const categoryColors: Record<string, string> = {
 
             {/* Category + Duration Row */}
             <div class="flex items-center gap-2 flex-wrap mb-3">
-              <span class={`inline-block px-3 py-1 text-xs font-medium rounded-full ${categoryColors[collab.category] || "bg-cream text-espresso"}`}>
+              <span class={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full border ${categoryChip[collab.category] || "bg-cream text-espresso border-sand/40"}`}>
+                <span class={`w-1.5 h-1.5 rounded-full ${categoryDot[collab.category] || "bg-mocha"}`}></span>
                 {collab.category}
               </span>
               <span class="px-3 py-1 text-xs font-semibold bg-mocha text-white rounded-full">
@@ -73,19 +82,27 @@ const categoryColors: Record<string, string> = {
             </div>
 
             {/* Description */}
-            <p class="text-sm text-taupe/90 leading-relaxed">
+            <p class="text-sm text-taupe/90 leading-relaxed mb-4">
               {collab.description}
             </p>
 
-            {/* View Brand hint */}
-            <div class="mt-4 flex items-center gap-1 text-mocha">
-              <span class="text-sm font-medium">View Brand</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+            {/* CTA: Campaign Files (Drive) */}
+            <div class="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-mocha text-white text-sm font-medium">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
               </svg>
+              <span>{collab.driveUrl ? "Campaign Files" : "Visit Brand"}</span>
             </div>
           </a>
         ))}
+      </div>
+      <!-- Deck progress indicator -->
+      <div class="flex items-center justify-center gap-2 mt-3 text-taupe/70">
+        <span data-deck-progress class="text-xs font-medium tracking-wide">1 / {collaborations.length}</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9L12 12.75 15.75 9M8.25 15L12 18.75 15.75 15"/>
+        </svg>
+        <span class="text-xs">Swipe to browse</span>
       </div>
     </div>
 
@@ -94,11 +111,8 @@ const categoryColors: Record<string, string> = {
     <!-- ============================================ -->
     <div class="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
       {collaborations.map((collab, index) => (
-        <a
-          href={collab.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="reveal group relative bg-ivory rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-sand/50 block"
+        <div
+          class="reveal group relative bg-ivory rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-sand/50 flex flex-col"
           style={`animation-delay: ${index * 0.08}s;`}
         >
           {/* Duration Badge */}
@@ -127,23 +141,31 @@ const categoryColors: Record<string, string> = {
           <span class="text-sm text-taupe block mb-3">{collab.handle}</span>
 
           {/* Category Tag */}
-          <span class={`inline-block px-3 py-1 text-xs font-medium rounded-full mb-4 ${categoryColors[collab.category] || "bg-cream text-espresso"}`}>
+          <span class={`inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded-full border mb-4 self-start ${categoryChip[collab.category] || "bg-cream text-espresso border-sand/40"}`}>
+            <span class={`w-1.5 h-1.5 rounded-full ${categoryDot[collab.category] || "bg-mocha"}`}></span>
             {collab.category}
           </span>
 
           {/* Description */}
-          <p class="text-sm text-taupe/90 leading-relaxed">
+          <p class="text-sm text-taupe/90 leading-relaxed flex-1">
             {collab.description}
           </p>
 
-          {/* Hover Arrow */}
-          <div class="mt-4 flex items-center gap-1 text-mocha opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-0 group-hover:translate-x-1">
-            <span class="text-sm font-medium">View Brand</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
-            </svg>
+          {/* CTAs */}
+          <div class="mt-5 pt-4 border-t border-cream/60">
+            <a
+              href={collab.driveUrl || collab.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-xl bg-mocha text-white text-sm font-medium transition-colors hover:bg-mocha/90"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+              </svg>
+              {collab.driveUrl ? "Campaign Files" : "Visit Brand"}
+            </a>
           </div>
-        </a>
+        </div>
       ))}
     </div>
 
@@ -219,6 +241,7 @@ const categoryColors: Record<string, string> = {
     if (total === 0) return;
 
     let current = 0;
+    let hasInteracted = false;
     let autoTimer: ReturnType<typeof setInterval>;
     let isPaused = false;
 
@@ -235,14 +258,31 @@ const categoryColors: Record<string, string> = {
           card.dataset.state = "hidden";
         }
       });
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const counter = deck.querySelector<HTMLElement>("[data-deck-progress]");
+      if (counter) {
+        counter.textContent = `${current + 1} / ${total}`;
+      }
+    }
+
+    const stage = document.getElementById("card-deck-stage");
+
+    function fitStageHeight() {
+      if (!stage) return;
+      let max = 0;
+      cards.forEach((card) => {
+        const h = card.offsetHeight;
+        if (h > max) max = h;
+      });
+      stage.style.height = `${max + 32}px`;
     }
 
     function goToCard(index: number) {
-      // Animate exit of current card
       const currentCard = cards[current] as HTMLElement;
       currentCard.dataset.state = "exiting";
-
-      // After brief exit animation, set new states
       setTimeout(() => {
         current = index;
         setCardStates(current);
@@ -254,22 +294,27 @@ const categoryColors: Record<string, string> = {
       goToCard(next);
     }
 
+    function stopAutoPlay() {
+      if (autoTimer) clearInterval(autoTimer);
+    }
+
     function startAutoPlay() {
       stopAutoPlay();
       autoTimer = setInterval(() => {
         if (!isPaused) nextCard();
-      }, 4000);
+      }, 6000);
     }
 
-    function stopAutoPlay() {
-      if (autoTimer) clearInterval(autoTimer);
+    function startAutoPlayIfUninteracted() {
+      if (!hasInteracted) startAutoPlay();
     }
 
     // Initialize states
     setCardStates(0, false);
 
-    // Start auto-play
+    // Start auto-play (6s, stops after first user interaction)
     startAutoPlay();
+    fitStageHeight();
 
     // Touch/swipe support
     let touchStartX = 0;
@@ -287,6 +332,8 @@ const categoryColors: Record<string, string> = {
 
       // Only respond to horizontal swipes (not vertical scroll)
       if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        hasInteracted = true;
+        stopAutoPlay();
         if (deltaX < 0) {
           // Swipe left → next
           nextCard();
@@ -296,22 +343,31 @@ const categoryColors: Record<string, string> = {
           goToCard(prev);
         }
       }
-
       isPaused = false;
-      startAutoPlay();
     }, { passive: true });
 
     // Pause on touch hold
     deck.addEventListener("touchstart", () => { isPaused = true; }, { passive: true });
 
-    // Visibility API — pause when tab not visible
+    // Stop autoplay permanently after any card tap/click
+    deck.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+      if (target.closest("a") || target.closest("button")) {
+        hasInteracted = true;
+        stopAutoPlay();
+      }
+    });
+
+    // Visibility API — pause/resume only if user hasn't interacted
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
         stopAutoPlay();
       } else {
-        startAutoPlay();
+        startAutoPlayIfUninteracted();
       }
     });
+
+    window.addEventListener("resize", fitStageHeight);
   }
 
   // Run on DOM ready
