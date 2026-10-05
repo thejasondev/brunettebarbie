@@ -28,7 +28,7 @@ const videos = [
     <!-- MOBILE: iPhone Carousel (< 768px) — snap   -->
     <!-- ============================================ -->
     <div class="block md:hidden reveal">
-      <div class="showcase-carousel" id="phone-carousel">
+      <div class="showcase-carousel" id="phone-carousel" style="touch-action: pan-x; overscroll-behavior-x: contain;">
         {videos.map((video) => (
           <div class="showcase-slide">
             <div class="portfolio-card">
@@ -272,11 +272,13 @@ const videos = [
     display: flex;
     gap: 1rem;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: 0 1rem;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
   }
 
   .showcase-carousel::-webkit-scrollbar {
@@ -288,6 +290,7 @@ const videos = [
     scroll-snap-align: center;
     display: flex;
     justify-content: center;
+    touch-action: pan-x;
   }
 
   /* Portfolio Play Overlay & Button */
@@ -416,14 +419,25 @@ const videos = [
       document.body.style.overflow = '';
     }
 
-    // Attach click events to device screens
+    // Attach click events to device screens — only open on tap, not swipe
+    let touchStartX = 0;
+    let touchStartY = 0;
+
     document.querySelectorAll<HTMLElement>('.device-screen').forEach((screen) => {
-      screen.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const src = screen.dataset.videoSrc;
-        if (src) {
-          openModal(src);
+      screen.addEventListener('touchstart', (e: TouchEvent) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      screen.addEventListener('click', (e: MouseEvent) => {
+        // Only open modal if it was a tap (no significant drag)
+        const deltaX = Math.abs((e as any).clientX - touchStartX);
+        const deltaY = Math.abs((e as any).clientY - touchStartY);
+        if (deltaX < 10 && deltaY < 10) {
+          e.preventDefault();
+          e.stopPropagation();
+          const src = screen.dataset.videoSrc;
+          if (src) openModal(src);
         }
       });
     });

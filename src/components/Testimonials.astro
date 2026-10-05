@@ -24,11 +24,11 @@ import { testimonials } from "../data/collaborations";
     <!-- MOBILE: Horizontal Snap Carousel (< 768px) -->
     <!-- ============================================ -->
     <div class="md:hidden -mx-6 px-6">
-      <div class="testimonial-carousel flex gap-4 overflow-x-auto pb-4 -mb-4 snap-x snap-mandatory">
+      <div class="testimonial-carousel flex gap-4 overflow-x-auto pb-4 -mb-4 snap-x snap-proximity" style="touch-action: pan-x; overscroll-behavior-x: contain;">
         {testimonials.slice(0, 3).map((testimonial, index) => (
           <article
             class="reveal group relative bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-500 border border-transparent shrink-0 w-[85%] max-w-xs snap-center"
-            style={`animation-delay: ${index * 0.1}s;`}
+            style={`animation-delay: ${index * 0.1}s; touch-action: pan-x;`}
           >
             <!-- Quote icon -->
             <div class="absolute top-5 right-5 text-cream/60">
@@ -130,15 +130,18 @@ import { testimonials } from "../data/collaborations";
 
 <style is:global>
   .testimonial-carousel {
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
   }
   .testimonial-carousel::-webkit-scrollbar {
     display: none;
   }
   .testimonial-carousel > * {
     scroll-snap-align: center;
+    touch-action: pan-x;
   }
 </style>
