@@ -25,32 +25,43 @@ const videos = [
     </div>
 
     <!-- ============================================ -->
-    <!-- MOBILE: Vertical Stack (< 768px)        -->
+    <!-- MOBILE: iPhone Stack (< 768px)            -->
     <!-- ============================================ -->
     <div class="block md:hidden reveal">
       <div class="space-y-8">
         {videos.map((video, index) => (
           <article class="reveal portfolio-card bg-white rounded-2xl shadow-card overflow-hidden" style={`animation-delay: ${index * 0.1}s;`}>
-            <div class="relative aspect-[19.5:9] overflow-hidden">
-              <video
-                src={`${video.src}#t=0.001`}
-                muted
-                playsinline
-                webkit-playsinline="true"
-                preload="metadata"
-                poster=""
-                class="w-full h-full object-cover"
-                loading="lazy"
-              ></video>
-              <div class="absolute inset-0 portfolio-play-overlay">
-                <div class="portfolio-play-btn">
-                  <svg class="w-8 h-8 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <div class="portfolio-device-wrapper portfolio-device-wrapper--phone">
+              <div class="device device-iphone-14-pro">
+                <div class="device-frame">
+                  <div class="device-screen" style="position: relative; cursor: pointer;" data-video-src={video.src}>
+                    <video
+                      src={`${video.src}#t=0.001`}
+                      muted
+                      playsinline
+                      webkit-playsinline="true"
+                      preload="metadata"
+                      poster=""
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    ></video>
+                    <div class="absolute inset-0 portfolio-play-overlay">
+                      <div class="portfolio-play-btn">
+                        <svg class="w-8 h-8 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <div class="device-stripe"></div>
+                <div class="device-header"></div>
+                <div class="device-sensors"></div>
+                <div class="device-btns"></div>
+                <div class="device-power"></div>
               </div>
             </div>
             <div class="p-5">
               <h3 class="font-heading text-lg font-semibold text-dark mb-1">{video.label}</h3>
-              <p class="text-sm text-taupe">Tap para ver en pantalla completa</p>
+              <p class="text-sm text-taupe">Tap to view fullscreen</p>
             </div>
           </article>
         ))}
