@@ -21,16 +21,12 @@ import { testimonials } from "../data/collaborations";
     </div>
 
     <!-- ============================================ -->
-    <!-- MOBILE: Horizontal Snap Carousel (< 768px) -->
+    <!-- MOBILE: Vertical Stack (< 768px)        -->
     <!-- ============================================ -->
-    <div class="md:hidden -mx-6 px-6">
-      <div class="testimonial-carousel flex gap-4 overflow-x-auto pb-4 -mb-4 snap-x snap-proximity" style="touch-action: pan-x; overscroll-behavior-x: contain;">
-        {testimonials.slice(0, 3).map((testimonial, index) => (
-          <article
-            class="reveal group relative bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-500 border border-transparent shrink-0 w-[85%] max-w-xs snap-center"
-            style={`animation-delay: ${index * 0.1}s; touch-action: pan-x;`}
-          >
-            <!-- Quote icon -->
+    <div class="md:hidden reveal">
+      <div class="space-y-6">
+        {testimonials.map((testimonial, index) => (
+          <article class="reveal portfolio-card bg-white rounded-2xl p-6 shadow-card border border-transparent" style={`animation-delay: ${index * 0.1}s;`}>
             <div class="absolute top-5 right-5 text-cream/60">
               <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zm-14.017 0v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H0z"/>
@@ -38,7 +34,7 @@ import { testimonials } from "../data/collaborations";
             </div>
 
             <!-- Brand info -->
-            <div class="flex items-center gap-3 mb-5">
+            <div class="flex items-center gap-3 mb-4">
               <div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
                 <img
                   src={testimonial.logo}
@@ -56,7 +52,7 @@ import { testimonials } from "../data/collaborations";
             </div>
 
             <!-- Quote -->
-            <blockquote class="text-sm text-espresso/80 leading-relaxed mb-5 font-light italic">
+            <blockquote class="text-base text-espresso/80 leading-relaxed mb-5 font-light italic">
               "{testimonial.quote}"
             </blockquote>
 
@@ -67,13 +63,6 @@ import { testimonials } from "../data/collaborations";
             </div>
           </article>
         ))}
-      </div>
-      <!-- Scroll hint -->
-      <div class="flex items-center justify-center gap-1.5 mt-3 text-taupe/70">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9L12 12.75 15.75 9M8.25 15L12 18.75 15.75 15"/>
-        </svg>
-        <span class="text-xs tracking-wide">Swipe to see more</span>
       </div>
     </div>
 
@@ -127,21 +116,3 @@ import { testimonials } from "../data/collaborations";
     </div>
   </div>
 </section>
-
-<style is:global>
-  .testimonial-carousel {
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    touch-action: pan-x;
-    overscroll-behavior-x: contain;
-  }
-  .testimonial-carousel::-webkit-scrollbar {
-    display: none;
-  }
-  .testimonial-carousel > * {
-    scroll-snap-align: center;
-    touch-action: pan-x;
-  }
-</style>
