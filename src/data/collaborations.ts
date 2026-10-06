@@ -41,7 +41,7 @@ export const collaborations: Collaboration[] = [
     description: "Luxury fashion partnership showcasing iconic pieces through high-end editorial content and exclusive brand experiences.",
     category: "Fashion",
     url: "https://www.ysl.com",
-    driveUrl: "https://drive.google.com/drive/folders/1OaWJUg8QVzexD7g3NWhtaM8gMkZrC1VG?usp=drive_link",
+    driveUrl: "https://drive.google.com/drive/folders/1VxUlH_bRJnha5zUN4QNA_-sPa2b8Co08?usp=drive_link",
     logo: "/logo-collab/ysl.webp",
   },
   {
